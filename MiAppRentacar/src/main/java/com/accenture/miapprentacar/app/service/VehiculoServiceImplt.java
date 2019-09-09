@@ -1,12 +1,15 @@
 package com.accenture.miapprentacar.app.service;
 
+import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.accenture.miapprentacar.app.entity.Vehiculo;
 import com.accenture.miapprentacar.app.dao.IVehiculoDao;
 
+@Service
 public class VehiculoServiceImplt implements IVehiculoService {
 
 	@Autowired
@@ -14,25 +17,26 @@ public class VehiculoServiceImplt implements IVehiculoService {
 	
 	@Override
 	public Vehiculo guardar(Vehiculo vehiculo) {
-		// TODO Auto-generated method stub
 		return vehiculoDao.save(vehiculo);
+	}
+	
+	@Override
+	public List<Vehiculo> guardar (Vehiculo[] vehiculos){
+		return (List<Vehiculo>) vehiculoDao.saveAll(Arrays.asList(vehiculos));
 	}
 
 	@Override
 	public void borrar(Long id) {
-		// TODO Auto-generated method stub
 		vehiculoDao.deleteById(id);
 	}
 
 	@Override
 	public Vehiculo buscaVehiculoPorId(Long id) {
-		// TODO Auto-generated method stub
 		return vehiculoDao.findById(id).orElse(null);
 	}
 
 	@Override
 	public List<Vehiculo> listarTodos() {
-		// TODO Auto-generated method stub
 		return (List<Vehiculo>) vehiculoDao.findAll();
 	}
 
